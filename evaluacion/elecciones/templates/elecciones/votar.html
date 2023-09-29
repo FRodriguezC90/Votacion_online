@@ -1,0 +1,37 @@
+{% extends 'elecciones/base.html' %} {% block content %}
+<div class="container">
+  <h1>Votos</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre Completo</th>
+        <th>Votar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for candidato in candidatos %}
+      <tr>
+        <td>{{ candidato.nombre }} {{ candidato.apellido }}</td>
+        <td>
+          <form action="{% url 'votar' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="nombre" value="{{ candidato.nombre }}" />
+            <input
+              type="hidden"
+              name="apellido"
+              value="{{ candidato.apellido }}"
+            />
+            <button type="submit" class="btn btn-primary">+ Voto</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="2">No hay candidatos inscritos aún.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
+{% endblock %}

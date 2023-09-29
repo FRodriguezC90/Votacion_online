@@ -1,0 +1,29 @@
+{% extends 'elecciones/base.html' %} {% block content %}
+<!--Formulario inscripciones-->
+<div class="container">
+  <h1>Inscripcion candidatos</h1>
+  <form action="{% url 'formulario' %}" method="post">
+    {% csrf_token %}
+    <div class="col-3">
+      <input
+        class="form-control mt-2"
+        type="text"
+        placeholder="Nombre Candidato"
+        name="nombre"
+        required
+      />
+      <input
+        class="form-control mt-2"
+        type="text"
+        placeholder="Apellido Candidato"
+        name="apellido"
+        required
+      />
+      <button class="btn btn-success mt-2" type="submit">Registrar</button>
+      <br />
+      <br />
+      <a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
